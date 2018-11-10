@@ -1,0 +1,64 @@
+#include <wire.h>
+#include <SPI.h>
+
+int front = 2; //Front Pin
+int back = 3; //Back pin
+
+unsigned long duration_front_high;
+unsigned long duration_front_low;
+
+unsigned long duration_back_high;
+unsigned long duration_front_low;
+
+unsigned long freq_front;
+unsigned long freq_back;
+
+byte address = 0x00;
+int CS = 10;
+
+void setup()
+{
+  pinMode(front, INPUT);
+  pinMode(back, INPUT);
+
+  pinMode (CS, OUTPUT);
+  SPI.begin();
+
+  Wire.begin();
+}
+
+void loop()
+{
+  duration_front_low = pulseIn(pin, LOW);
+  duration_back_low = pulseIn(back, LOW);
+
+  freq_front = 1/duration_front_low;
+  freq_back = 1/duration_back_low;
+
+  //potentiometer gets 0 if no traction control, max value of 64
+  if(freq_fback > 1.1*freq_front && potentiometer <= 128){
+    potentiometer += 1;
+  }
+  else{
+    
+    potentiometer = 0;
+  }
+  
+  digitalPotWrite(potentiometer);
+  
+  serial.println("Front Freq: " %ul, freq_front);
+  serial.println("Back Freq: " %ul, freq_back);
+  serial.println("Potentiometer: " %d, potentiometer);
+  
+  delay(10);
+
+  
+}
+
+int digitalPotWrite(int value)
+{
+  digitalWrite(CS, LOW);
+  SPI.transfer(address);
+  SPI.transfer(value);
+  digitalWrite(CS, HIGH);
+}
