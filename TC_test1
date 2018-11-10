@@ -16,6 +16,8 @@ unsigned long freq_back;
 byte address = 0x00;
 int CS = 10;
 
+int potentiometer = 0;
+
 void setup()
 {
   pinMode(front, INPUT);
