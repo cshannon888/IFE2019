@@ -40,8 +40,8 @@ void loop() {
 
   error_dif = target_error - error;
 
-  integral += error;
-  derivative = error - last_error;
+  integral += error_dif;
+  derivative = error_dif - last_error;
 
   sum = integral_multiplier*integral + derivative_multiplier*derivative + proportional_multiplier*proportional;
 
@@ -57,6 +57,8 @@ void loop() {
 
 
   digitalPotWrite(potentiometer);
+  
+  last_error = error_dif
   
   delay(100);
 
