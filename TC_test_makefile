@@ -62,7 +62,7 @@ const int integral_multiplier = 1;
   double last_error = 0;
   double error_dif = 0;
   
-  float frequencyFR, frequencyFL, frequencyBR, frequencyBL;
+  float frequencyFR, frequencyFL, frequencyBR, frequencyBL, frequency_front, frequency_back, error;
   
   int pot_val;
 
@@ -215,8 +215,8 @@ int main() {
     
     error_dif = target_error - error;
 
-    integral += error;
-    derivative = error - last_error;
+    integral += error_dif;
+    derivative = error_dif - last_error;
 
     sum = integral_multiplier*integral + derivative_multiplier*derivative + proportional_multiplier*proportional;
 
@@ -232,6 +232,8 @@ int main() {
     
     
     digitalPotWrite(potentiometer);
+    
+    last_error = error_dif;
     
     delay(100);
 		
