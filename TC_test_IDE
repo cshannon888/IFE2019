@@ -30,7 +30,7 @@ void loop() {
   double last_error = 0;
   double error_dif = 0;
   
-  float frequencyFR, frequencyFL, frequencyBR, frequencyBL;
+  float frequencyFR, frequencyFL, frequencyBR, frequencyBL, frequency_front, frequency_back, error;
 
   //average front and back frequencies
   frequency_front = (frequencyFR + frequencyFL)/2;
