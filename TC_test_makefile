@@ -220,7 +220,7 @@ int main() {
 
     sum = integral_multiplier*integral + derivative_multiplier*derivative + proportional_multiplier*proportional;
 
-    potentiometer += sum;
+    potentiometer = sum;
 
     if(potentiometer < 0){
       potentiometer = 0;
@@ -232,8 +232,10 @@ int main() {
     
     
     digitalPotWrite(potentiometer);
+    
+    delay(100);
 		
-	}
+    }
   
 
   
