@@ -1,0 +1,50 @@
+void setup() {
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+
+  //CODE TO GET FREQUENCIES
+
+  const int integral_multiplier = 1;
+  const int derivative_multiplier = 1;
+  const int proportional_multiplier = 1;
+  double sum = 0;
+
+  byte potentiometer = 0;;
+
+  const double target_error = 0.1; //10 percent slip
+
+  double integral = 0;
+  double derivative = 0;
+  double proportional = 1;
+
+  double last_erro = 0;
+  double error_dif = 0;
+  
+  float frequencyFR, frequencyFL, frequencyBR, frequencyBL;
+
+  //average front and back frequencies
+  frequency_front = (frequencyFR + frequencyFL)/2;
+  frequency_back = (frequencyBR + frequencyBL)/2;
+
+  error = (frequency_back - frequency_front)/((frequency_back - frequency_front)/2); //find real error of slip
+
+  error_dif = target_error - error;
+
+  integral += error;
+  derivative = error - last_error;
+
+  sum = integral_multiplier*integral + derivative_multiplier*derivative + proportional_multiplier*proportional;
+
+  potentiometer += sum;
+
+  if(potentiometer < 0){
+    potentiometer = 0;
+  }
+
+  //SEND POT DATA OUT TO POT
+
+  
+}
